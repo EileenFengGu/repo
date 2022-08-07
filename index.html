@@ -5,6 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="depictions/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="style.css?rand=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -13,10 +16,27 @@
   <script type="text/javascript" src="js/ios_version_check.js"></script>
    <script type="text/javascript" src="js/content-blocks-index.js"></script>
   <script type="text/javascript">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link rel="stylesheet" href="depictions/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+	bundleid = $.QueryString['p'];
+
+	var contentBlocks = getContentBlocks();
+
+    $( document ).ready(function() {
+		//return;
+		populateContentBlocks(
+			(bundleid+"/info.xml"),
+			contentBlocks,
+			() => {
+                $("#packageError").show();
+				$("#packageInformation").hide();				
+			},
+			(xml) => {
+				document.title = $(xml).find("package>name").text();
+			}
+		)
+
+    }); // ready
+  </script>
 </head>
 <body>
 
@@ -56,12 +76,15 @@
 		  <p class="card-text">This is a sample package with lots of information.</p>
 		  <a class="btn btn-xs btn-primary" href="depictions/?p=com.supermamon.newpackage">More info</a>
 		</div>
-	</div>
-	<div id="contactInfo">
-	<div class="container">
-		<h5>CONTACT</h5>
-		<ul class="list-group" id="repoFooterLinks">
-		<a class="link-item list-group-item" href="https://twitter.com/"><span class="fa fa-twitter"></span>Follow me on Twitter</a><a class="link-item list-group-item" href="https://eileenfenggu.github.io/repo/"><span class="fa fa-thumbs-up"></span>I want this depiction template</a></ul>
+</div>
+<p></p>
+<div class="container">
+  <h3 id="wells" class="page-header">Contact</h3>
+</div>
+
+<div class="container">
+	<div class="card">
+	      <a class="link-item list-group-item" href="https://twitter.com/"><span class="fa fa-twitter"></span>Follow me on Twitter</a><a class="link-item list-group-item" href="https://eileenfenggu.github.io/"><span class="fa fa-thumbs-up"></span>I want this depiction template</a></ul>
 		</div>
 	</div>
 
